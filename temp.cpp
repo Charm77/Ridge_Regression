@@ -33,35 +33,66 @@ vector<vector<double>>identity(int n){
     }
     return I;
 }
-vector<double>solve(vector<vector<double>>A,vector<double>b){
-   int n=A.size();
-    for(int i=0;i<n;i++){
-        int pivot=i;
-    }
-    for(int j=i+1;j<n;j++){
-        if(abs(A[j][i])>abs(A[pivot][i]))pivot=j;
-    }
-        swap(A[i],A[pivot]);
-        swap(b[i],b[pivot]);
+vector<double> solve(vector<vector<double>> A, vector<double> b) {
+    int n = A.size();
+    for (int i = 0; i < n; i++) {
+        int pivot = i;
+        for (int j = i + 1; j < n; j++) {
+            if (abs(A[j][i]) > abs(A[pivot][i])) pivot = j;
+        }
+        swap(A[i], A[pivot]);
+        swap(b[i], b[pivot]);
 
-double diag=A[i][i];
-for(int j=i;j<n;j++) A[i][j]/=diag;
-    b[i]/=diag;
+        double diag = A[i][i];
+        for (int j = i; j < n; j++) A[i][j] /= diag;
+        b[i] /= diag;
 
-
-for(int k = i+1; k < n; k++){
+        for (int k = i + 1; k < n; k++) {
             double factor = A[k][i];
-            for(int j = i; j < n; j++) A[k][j] -= factor * A[i][j];
+            for (int j = i; j < n; j++) A[k][j] -= factor * A[i][j];
             b[k] -= factor * b[i];
         }
     }
 
     vector<double> x(n);
-    for(int i = n-1; i >= 0;i--){
+    for (int i = n - 1; i >= 0; i--) {
         x[i] = b[i];
-        for(int j = i+1; j < n; j++) x[i] -= A[i][j] * x[j];
+        for (int j = i + 1; j < n; j++) x[i] -= A[i][j] * x[j];
     }
     return x;
 }
 
+int main(){
+        {1,2,3},
+        {4,5,6},
+    };
+
+    vector<vector<double>> B = {
+        {7,8},
+        {9,10},
+        {11,12},
+    };
+
+    vector<vector<double>> C = multiply(A,B);
+
+    cout <<"Result of A * B:" << endl;
+    for(int i = 0; i < C.size(); i++){
+        for(int j = 0; j < C[0].size(); j++){
+            cout << C[i][j] << " ";        
+    }
+    cout << endl;
+}
+
+vector<vector<double>> T = transpose(A);
+
+cout << "\nTranspose of A:" << endl;
+for(int = 0; i < T.size(); i++){
+    for(int j = 0; j < T[0].size(); j++){
+        cout << T[i][j] << " ";
+    }
+    cout << endl;
+} 
+
+return 0;
+}
 
