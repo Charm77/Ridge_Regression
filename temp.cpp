@@ -1,10 +1,2 @@
-#include <stdio.h>
-
-int main(void)
-{
-    printf("Hello, World!\n");
-    return 0;
-
-hjvcxjhdsgvhsdfghskdfg
-}
-hgfjkjk}vryh
+#include<bits/stdc++.h>
+using namespace std;
