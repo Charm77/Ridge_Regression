@@ -63,5 +63,38 @@ for(int k = i+1; k < n; k++){
     }
     return x;
 }
+int main(){
+    vector<vector<double>>A={
+        {1,2,3},
+        {4,5,6},
+    };
 
+    vector<vector<double>> B = {
+        {7,8},
+        {9,10},
+        {11,12},
+    };
+
+    vector<vector<double>> C = multiply(A,B);
+
+    cout <<"Result of A * B:" << endl;
+    for(int i = 0; i < C.size(); i++){
+        for(int j = 0; j < C[0].size(); j++){
+            cout << C[i][j] << " ";        
+    }
+    cout << endl;
+}
+
+vector<vector<double>> T = transpose(A);
+
+cout << "\nTranspose of A:" << endl;
+for(int = 0; i < T.size(); i++){
+    for(int j = 0; j < T[0].size(); j++){
+        cout << T[i][j] << " ";
+    }
+    cout << endl;
+} 
+
+return 0;
+}
 
