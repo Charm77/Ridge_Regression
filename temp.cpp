@@ -33,3 +33,7 @@ vector<vector<double>>identity(n){
     }
     return I;
 }
+vector<double>>solve(vector<vector<double>>A,vector<double>b){
+    n=A.size();
+    m=
+}
