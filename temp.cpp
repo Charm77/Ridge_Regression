@@ -1,39 +1,67 @@
 #include<bits/stdc++.h>
 using namespace std;
-  int n,m,p,i,j,k;
-vector<vector<double>>multiply(vector<double>>&A,vector<vector<double>>&B){
-     n=A.size();
-     m=B[0].size();
-     p=B.size();
-    vector<vector<double>>C(n,vector<double>(m,0));
-    for(i=0;i<n;i++){
-        for(j=0;j<m;j++){
-            for(k=0;k<p;k++){
-                c[i][j]+=A[i][k];*B[k][j];
+  
+vector<vector<double>>multiply(vector<vector<double>>&A,vector<vector<double>>&B){
+    int n=A.size();
+    int  m=B[0].size();
+    int p=B.size();
+    vector<vector<double>>c(n,vector<double>(m,0));
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            for(int k=0;k<p;k++){
+                c[i][j]+=A[i][k]*B[k][j];
             }
         }
     }
-    return C;
+    return c;
 }
 vector<vector<double>>transpose(vector<vector<double>>&A){
-    n=A.size();
-    m=A[0].size();
+    int n=A.size();
+    int m=A[0].size();
     vector<vector<double>>T(m,vector<double>(n));
-    for(i=0;i<n;i++){
-        for(j=0;j<m;j++){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
             T[j][i]=A[i][j];
         } 
        }
        return T;
 }
-vector<vector<double>>identity(n){
+vector<vector<double>>identity(int n){
     vector<vector<double>>I(n,vector<double>(n,0));
-    for(i=0;i<n;i++){
-        I[i][j]=1.0;
+    for(int i=0;i<n;i++){
+        I[i][i]=1.0;
     }
     return I;
 }
-vector<double>>solve(vector<vector<double>>A,vector<double>b){
-    n=A.size();
-    m=
+vector<double>solve(vector<vector<double>>A,vector<double>b){
+   int n=A.size();
+    for(int i=0;i<n;i++){
+        int pivot=i;
+    }
+    for(int j=i+1;j<n;j++){
+        if(abs(A[j][i])>abs(A[pivot][i]))pivot=j;
+    }
+        swap(A[i],A[pivot]);
+        swap(b[i],b[pivot]);
+
+double diag=A[i][i];
+for(int j=i;j<n;j++) A[i][j]/=diag;
+    b[i]/=diag;
+
+
+for(int k = i+1; k < n; k++){
+            double factor = A[k][i];
+            for(int j = i; j < n; j++) A[k][j] -= factor * A[i][j];
+            b[k] -= factor * b[i];
+        }
+    }
+
+    vector<double> x(n);
+    for(int i = n-1; i >= 0; i--){
+        x[i] = b[i];
+        for(int j = i+1; j < n; j++) x[i] -= A[i][j] * x[j];
+    }
+    return x;
 }
+
+
