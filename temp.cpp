@@ -26,7 +26,7 @@ vector<vector<double>>transpose(vector<vector<double>>&A){
        }
        return T;
 }
-vector<vector<double>>identity(int n){
+vector<vector<double>>identity(n){
     vector<vector<double>>I(n,vector<double>(n,0));
     for(i=0;i<n;i++){
         I[i][j]=1.0;
