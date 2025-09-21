@@ -132,7 +132,7 @@ int main()
     // True slope = 4, bias =2, noise= Gaussian(0,5)
     for (int i=0; i<n; i++)
     {
-        double xi((rand()%1000) / 1000.0) * 10 - 5;
+        double xi = ((rand()%1000) / 1000.0) * 10 - 5;
         X[i][1] = xi;
         y[i] = 2 + 4 * xi +((rand()%1000) / 1000.0) * 10 - 5;
     }
@@ -160,4 +160,3 @@ int main()
 
     return 0;
 }
-
