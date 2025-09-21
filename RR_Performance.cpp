@@ -2,6 +2,7 @@
 
 using namespace std;
 
+//Comparing Ridge Regression performance against standard Linear Regression on noisy data
 double meanSquaredError( const vector<double>& y_true, const vector<double>& y_pred)
 {
     double mse=0.0;
@@ -13,11 +14,13 @@ double meanSquaredError( const vector<double>& y_true, const vector<double>& y_p
 }
 
 
+//Standard Linear Regression (Normal Equation)
 vector<double> linearRegression(const vector<vector<double>>& X, const vector<double>& y)
 {
     int n = X.size();
     int d = X[0].size();
 
+    //Convert to Eigen-style martices manually
     vector<vector<double>> XtX(d, vector<double>(d, 0));
     vector<double>Xty(d,0);
 
@@ -33,6 +36,7 @@ vector<double> linearRegression(const vector<vector<double>>& X, const vector<do
         }
     }
 
+    //Solve linear system XtX * w = Xty using Gaussian elimination
     vector<double> w=Xty; 
 
     for(int i=0; i<d; i++)
@@ -62,7 +66,7 @@ vector<double> linearRegression(const vector<vector<double>>& X, const vector<do
 }
 
 
-
+//Ridge Regression
 vector<double> ridgeRegression(const vector<vector<double>>& X, const vector<double>& y, double alpha)
 {
     int n = X.size();
@@ -83,11 +87,13 @@ vector<double> ridgeRegression(const vector<vector<double>>& X, const vector<dou
         }
     }
 
+    //Add alpha * I to diagonal (Ridge penalty) 
     for(int i=0; i<d; i++)
     {
         XtX[i][i] += alpha;
     }
     
+    //Solve XtX * w = Xty
     vector<double> w=Xty;
     for(int i=0; i<d; i++)
     {
@@ -123,6 +129,7 @@ int main()
 
     vector<double> y(n);
 
+    // True slope = 4, bias =2, noise= Gaussian(0,5)
     for (int i=0; i<n; i++)
     {
         double xi((rand()%1000) / 1000.0) * 10 - 5;
@@ -130,10 +137,13 @@ int main()
         y[i] = 2 + 4 * xi +((rand()%1000) / 1000.0) * 10 - 5;
     }
 
+    // Linear Regression
     vector<double> w_lr = linearRegression(X, y);
 
+    // Ridge Regression
     vector<double> w_ridge = ridgeRegression(X, y, 10.0);
 
+    //Predictions
     vector<double> y_pred_lr(n), y_pred_ridge(n);
 
     for (int i=0; i<n; i++)
