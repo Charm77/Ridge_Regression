@@ -57,7 +57,7 @@ for(int k = i+1; k < n; k++){
     }
 
     vector<double> x(n);
-    for(int i = n-1; i >= 0; i--){
+    for(int i = n-1; i >= 0; ){
         x[i] = b[i];
         for(int j = i+1; j < n; j++) x[i] -= A[i][j] * x[j];
     }
