@@ -15,3 +15,14 @@ vector<vector<double>>multiply(vector<double>>&A,vector<vector<double>>&B){
     }
     return C;
 }
+vector<vector<double>>transpose(vector<vector<double>>&A){
+    n=A.size();
+    m=A[0].size();
+    vector<vector<double>>T(m,vector<double>(n));
+    for(i=0;i<n;i++){
+        for(j=0;j<m;j++){
+            T[j][i]=A[i][j];
+        } 
+       }
+       return T;
+}
