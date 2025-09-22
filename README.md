@@ -10,3 +10,6 @@ Here are the 3 attached files. Which are representing the following code for the
 -[Compare its performance against standard Linear Regression on noisy data.](RR_Performance.cpp)
 
 -[Discuss the effect of the regularization parameter λ.](oooo.cpp)
+
+##Build/Run:
+

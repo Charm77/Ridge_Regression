@@ -63,37 +63,49 @@ vector<double> solve(vector<vector<double>> A, vector<double> b) {
     return x;
 }
 
-int main(){
-        {1,2,3},
-        {4,5,6},
-    };
 
-    vector<vector<double>> B = {
-        {7,8},
-        {9,10},
-        {11,12},
-    };
+int main() 
+{
+    int n, m;
+    cout << "Enter number of samples (n) and features (m): ";
+    cin >> n >> m;
 
-    vector<vector<double>> C = multiply(A,B);
+    vector<vector<double>> X(n, vector<double>(m+1, 1.0));
+    vector<double> y(n);
 
-    cout <<"Result of A * B:" << endl;
-    for(int i = 0; i < C.size(); i++){
-        for(int j = 0; j < C[0].size(); j++){
-            cout << C[i][j] << " ";        
-    }
+    cout << "Enter feature matrix row-wise:\n";
+    for(int i=0;i<n;i++)
+        for(int j=1;j<=m;j++)
+            cin >> X[i][j];
+
+    cout << "Enter target values (y):\n";
+    for(int i=0;i<n;i++) cin >> y[i];
+
+    double lambda;
+    cout << "Enter lambda (regularization parameter): ";
+    cin >> lambda;
+
+    vector<vector<double>> Xt = transpose(X);
+    vector<vector<double>> XtX = multiply(Xt, X);
+
+    // Add lambda to diagonal (skip intercept)
+    for(int i=1;i<XtX.size();i++) XtX[i][i] += lambda;
+
+    // Convert y to column vector for multiplication
+    vector<vector<double>> y_col(n, vector<double>(1));
+    for(int i=0;i<n;i++) y_col[i][0] = y[i];
+    vector<vector<double>> XtY = multiply(Xt, y_col);
+
+    // Convert XtY to 1D vector for solve
+    vector<double> XtY_vec(m+1);
+    for(int i=0;i<=m;i++) XtY_vec[i] = XtY[i][0];
+
+    vector<double> beta = solve(XtX, XtY_vec);
+
+    cout << "\nRidge Regression Coefficients (beta):\n";
+    for(double val : beta) cout << val << " ";
     cout << endl;
+
+    return 0;    
+
 }
-
-vector<vector<double>> T = transpose(A);
-
-cout << "\nTranspose of A:" << endl;
-for(int = 0; i < T.size(); i++){
-    for(int j = 0; j < T[0].size(); j++){
-        cout << T[i][j] << " ";
-    }
-    cout << endl;
-} 
-
-return 0;
-}
-
