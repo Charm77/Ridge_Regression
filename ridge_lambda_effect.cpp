@@ -19,7 +19,7 @@ int main() {
     VectorXd noise = VectorXd::Random(n) * 2;
     VectorXd y = 4 + 3 * X.array() + noise.array();
 
-    // Add bias column
+    // bias column addition
     MatrixXd X_b(n, 2);
     X_b << VectorXd::Ones(n), X;
 
