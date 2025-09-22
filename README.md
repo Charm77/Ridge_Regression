@@ -11,4 +11,4 @@ Here are the 3 attached files. Which are representing the following code for the
 
 -[Discuss the effect of the regularization parameter λ.](oooo.cpp)
 
-We have tried to maintain the minimal documentation by using functions, comments and also ensured that the code is readable for anyone.
+We have tried to maintain the minimal documentation by using functions, comments and also ensured that the code is readable for anyone. 
