@@ -1,10 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
+
+//Matrix multiplication function:c=A*B
   
 vector<vector<double>>multiply(vector<vector<double>>&A,vector<vector<double>>&B){
     int n=A.size();
     int  m=B[0].size();
     int p=B.size();
+    //Initialize result matrix with Zeros
     vector<vector<double>>c(n,vector<double>(m,0));
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
@@ -15,38 +18,38 @@ vector<vector<double>>multiply(vector<vector<double>>&A,vector<vector<double>>&B
     }
     return c;
 }
+
+//Matrix Transpose function :T=A^T
 vector<vector<double>>transpose(vector<vector<double>>&A){
     int n=A.size();
     int m=A[0].size();
     vector<vector<double>>T(m,vector<double>(n));
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            T[j][i]=A[i][j];
+            T[j][i]=A[i][j];//swap rows and columns
         } 
        }
        return T;
 }
-vector<vector<double>>identity(int n){
-    vector<vector<double>>I(n,vector<double>(n,0));
-    for(int i=0;i<n;i++){
-        I[i][i]=1.0;
-    }
-    return I;
-}
+
+
+//solve linear equation Ax=b using Gaussian elimination
 
 vector<double> solve(vector<vector<double>> A, vector<double> b) {
     int n = A.size();
     for (int i = 0; i < n; i++) {
-        int pivot = i;
+         int pivot = i;//partial pivoting to avoid numerical errors
         for (int j = i + 1; j < n; j++) {
             if (abs(A[j][i]) > abs(A[pivot][i])) pivot = j;
         }
         swap(A[i], A[pivot]);
         swap(b[i], b[pivot]);
-
+        //Make pivot element =1
         double diag = A[i][i];
         for (int j = i; j < n; j++) A[i][j] /= diag;
         b[i] /= diag;
+       
+        //Eliminate other elements in column
 
         for (int k = i + 1; k < n; k++) {
             double factor = A[k][i];
@@ -58,7 +61,8 @@ vector<double> solve(vector<vector<double>> A, vector<double> b) {
     vector<double> x(n);
     for (int i = n - 1; i >= 0; i--) {
         x[i] = b[i];
-        for (int j = i + 1; j < n; j++) x[i] -= A[i][j] * x[j];
+        for (int j = i + 1; j < n; j++)
+         x[i] -= A[i][j] * x[j];
     }
     return x;
 }
