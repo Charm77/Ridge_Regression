@@ -13,3 +13,6 @@ Here are the 3 attached files. Which are representing the following code for the
 
 ##Build/Run:
 
+-[Implement and explain Ridge Regression using Normal Equations.](temp.exe)
+
+-[Compare its performance against standard Linear Regression on noisy data.](RR_Performance.exe)
