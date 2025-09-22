@@ -33,6 +33,7 @@ vector<vector<double>>identity(int n){
     }
     return I;
 }
+
 vector<double> solve(vector<vector<double>> A, vector<double> b) {
     int n = A.size();
     for (int i = 0; i < n; i++) {
