@@ -1,22 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-//Matrix multiplication function:c=A*B
+//Matrix multiplication function:C=A*B
   
 vector<vector<double>>multiply(vector<vector<double>>&A,vector<vector<double>>&B){
     int n=A.size();
-    int  m=B[0].size();
+    int m=B[0].size();
     int p=B.size();
     //Initialize result matrix with Zeros
-    vector<vector<double>>c(n,vector<double>(m,0));
+    vector<vector<double>>C(n,vector<double>(m,0));
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
             for(int k=0;k<p;k++){
-                c[i][j]+=A[i][k]*B[k][j];
+                C[i][j]+=A[i][k]*B[k][j];
             }
         }
     }
-    return c;
+    return C;
 }
 
 //Matrix Transpose function :T=A^T
