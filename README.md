@@ -3,7 +3,7 @@ Implement and explain Ridge Regression using Normal Equations. Compare its perfo
 
 Here are the 3 attached files. Which are representing the following code for the above topic. The codes are:-
 
-##Code Files:
+## Code Files:
 
 -[Implement and explain Ridge Regression using Normal Equations.](temp.cpp)
 
@@ -11,7 +11,7 @@ Here are the 3 attached files. Which are representing the following code for the
 
 -[Discuss the effect of the regularization parameter λ.](oooo.cpp)
 
-##Build/Run:
+## Build/Run:
 
 -[Implement and explain Ridge Regression using Normal Equations.](temp.exe)
 
