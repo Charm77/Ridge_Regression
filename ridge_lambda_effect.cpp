@@ -8,18 +8,21 @@ using namespace Eigen;
 VectorXd ridge_regression(const MatrixXd &X, const VectorXd &y, double lambda) {
     int n_features = X.cols();
     MatrixXd I = MatrixXd::Identity(n_features, n_features);
-    I(0,0) = 0; // do not regularize bias
+    I(0,0) = 0; // do not regularize bias term
+    // Solve (XᵀX + λI)θ = Xᵀy
     return (X.transpose() * X + lambda * I).ldlt().solve(X.transpose() * y);
 }
 
 int main() {
-    srand(42);
-    int n = 100;
-    VectorXd X = 2 * VectorXd::Random(n).array().abs();
-    VectorXd noise = VectorXd::Random(n) * 2;
-    VectorXd y = 4 + 3 * X.array() + noise.array();
+    srand(42); // fix random seed for reproducibility
+    cout << "Random seed fixed at 42\n";
 
-    // bias column addition
+    int n = 100; // number of data points
+    VectorXd X = 2 * VectorXd::Random(n).array().abs(); // input feature
+    VectorXd noise = VectorXd::Random(n) * 2; // noise term
+    VectorXd y = 4 + 3 * X.array() + noise.array(); // true relation: y = 4 + 3x + noise
+
+    // bias column addition (1 for intercept term)
     MatrixXd X_b(n, 2);
     X_b << VectorXd::Ones(n), X;
 
@@ -30,8 +33,9 @@ int main() {
     VectorXd y_train = y.head(split);
     VectorXd y_test  = y.tail(n - split);
 
+    // Different regularization strengths
     vector<double> lambdas = {0, 0.1, 1, 10, 100};
-    cout << "Lambda | Train MSE | Test MSE\n";
+    cout << "Lambda | Train MSE | Test MSE | Coefficients (bias, slope)\n";
 
     for(double lam : lambdas) {
         VectorXd theta = ridge_regression(X_train, y_train, lam);
@@ -41,7 +45,11 @@ int main() {
         double train_mse = (y_train - y_train_pred).squaredNorm() / y_train.size();
         double test_mse  = (y_test  - y_test_pred ).squaredNorm() / y_test.size();
 
-        cout << lam << " | " << train_mse << " | " << test_mse << "\n";
+        // print lambda, errors, and learned coefficients
+        cout << lam << " | " << train_mse << " | " << test_mse
+             << " | [" << theta(0) << ", " << theta(1) << "]\n";
     }
+
+    cout << "Note: As lambda increases, coefficients shrink towards zero.\n";
     return 0;
 }
