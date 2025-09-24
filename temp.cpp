@@ -67,6 +67,27 @@ vector<double> solve(vector<vector<double>> A, vector<double> b) {
     return x;
 }
 
+// Ridge Regression function
+vector<double> ridgeRegression(vector<vector<double>> X, vector<double> y, double lambda) {
+    //  Compute X^T * X
+    vector<vector<double>> XT = transpose(X);
+    vector<vector<double>> XT_X = multiply(XT, X);
+
+    // Add lambda to diagonal (Ridge regularization)
+    for (int i = 0; i < XT_X.size(); i++) {
+        XT_X[i][i] += lambda;
+    }
+
+    // Compute X^T * y
+    vector<vector<double>> y_col(y.size(), vector<double>(1));
+    for (int i = 0; i < y.size(); i++) y_col[i][0] = y[i];
+
+    vector<vector<double>> XT_y = multiply(XT, y_col);
+
+    // Solve for coefficients
+    vector<double> beta = solve(XT_X, XT_y[0]);
+    return beta;
+}
 
 int main() 
 {
